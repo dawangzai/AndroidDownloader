@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.wangzai.library.downloader.Downloader
 import com.wangzai.library.downloader.IDownload
+import com.wangzai.library.entity.Notify
 
 class DownloaderBuilder(
     var context: Context,
@@ -12,7 +13,8 @@ class DownloaderBuilder(
     var subPath: String?,
     var name: String?,
     var progress: ((Int, Int) -> Unit)?,
-    var status: ((Int) -> Unit)?
+    var status: ((Int) -> Unit)?,
+    var notify: Notify?
 ) {
     private constructor(builder: Builder) : this(
         builder.context,
@@ -21,7 +23,8 @@ class DownloaderBuilder(
         builder.subPath,
         builder.name,
         builder.progress,
-        builder.status
+        builder.status,
+        builder.notify
     )
 
     companion object {
@@ -48,6 +51,7 @@ class DownloaderBuilder(
         var name: String? = null
         var progress: ((Int, Int) -> Unit)? = null
         var status: ((Int) -> Unit)? = null
+        var notify: Notify? = null
 
         fun build() = DownloaderBuilder(this)
     }

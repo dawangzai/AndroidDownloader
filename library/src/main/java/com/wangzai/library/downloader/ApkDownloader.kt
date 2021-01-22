@@ -20,8 +20,10 @@ class ApkDownloader(builder: DownloaderBuilder) :
 
     override fun makeRequest(): DownloadManager.Request {
         return DownloadManager.Request(Uri.parse(builder.url)).apply {
-            setTitle("下载标题")
-            setDescription("下载描述")
+            builder.notify?.let {
+                setTitle(it.title)
+                setDescription(it.description)
+            }
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
             setDestinationInExternalFilesDir(
                 builder.context,
